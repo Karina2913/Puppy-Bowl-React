@@ -1,6 +1,11 @@
 import { getAllPlayers } from "../API";
 import { useState, useEffect } from 'react';
 import SinglePlayer from "./SinglePlayer";
+import { fetchSinglePlayer } from "../API";
+import { addNewPlayer } from "../API";
+import { removePlayer } from "../API";
+import PlayerItem from "./PlayerItem";
+// import NewPlayerForm from "./NewPlayerForm";
 
 export default function AllPlayers() {
     const [players, setPlayers] = useState([]);
@@ -18,21 +23,17 @@ export default function AllPlayers() {
     }, []);
 
     return (
-        <div className="all-players">
-            <h1>All Players Component</h1>
-            {
-                players.map((player) => {
-                    return (
-                        // <div>
-                        //     <h4>{player.name}</h4>
-                        // </div>
-                        <SinglePlayer 
-                            key={player.id}
-                            player={player}
-                        />
-                    )
-                })
-            }
+        <div className="all-players-container">
+            {/* <NewPlayerForm /> */}
+            <div className="all-players">
+                {
+                    players.map((player) => {
+                        return (
+                            <PlayerItem key={player.id} player={player} />
+                        )
+                    })
+                }
+            </div>
         </div>
     );
 }
